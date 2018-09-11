@@ -101,6 +101,14 @@ public class CopyOnWriteTest {
  */
 
 
+/**
+ * CopyOnWriteArraySet  is backed-up by CopyOnWriteArrayList to achieve the concurrent functionality.
+ * Note - we should use CopyOnWriteArraySet only when the read operations outnumber the write operations
+ *        and has a small number of elements, because the set creates a new copy of its elements for each write operation,
+ *        which affects performance if the set has a large number of elements and the write operations are frequent.
+ */
+
+
 
 /**
  *      Fail-Fast Iterator
@@ -120,8 +128,8 @@ public class CopyOnWriteTest {
 
 /**
  * References -
- *          https://netjs.blogspot.com/2016/01/copyonwritearraylist-in-java.html
+ *          https://netjs.blogspot.com/2016/03/copyonwritearrayset-in-java-concurrency.html
  *          https://www.codejava.net/java-core/concurrency/java-concurrent-collection-copyonwritearraylist-examples
- *          http://www.benchresources.net/copyonwritearraylist-vs-synchronizedlist-in-java/
+ *          http://www.benchresources.net/copyonwritearrayset-vs-synchronizedset-in-java/
  *          https://stackoverflow.com/questions/28979488/difference-between-copyonwritearraylist-and-synchronizedlist
  */

@@ -133,6 +133,13 @@ public class CopyOnWriteTest {
  */
 
 /**
+ * When to use ?
+ *      we should use CopyOnWriteArrayList only when the number of write operations is very small
+ *      as compared to the read operations and the list contains a small number of elements.
+ */
+
+
+/**
  *      Fail-Fast Iterator
  * If a thread modifies the structure of a collection i.e. add elements to it or remove elements from it,
  * while another thread (or same thread) is iterating over it, ConcurrentModificationException may be thrown by the iterator.
