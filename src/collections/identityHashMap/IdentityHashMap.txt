@@ -1,0 +1,41 @@
+IdentityHashMap is the special implementation of Map interface.
+
+
+Difference between IdentityHashMap and HashMap in Java
+1. Equality used(Reference Equality instead of Object Equality) :
+    IdentityHashMap uses reference equality to compare keys and
+    values while HashMap uses object equality to compare keys and values .
+    for example :
+    Suppose we have two keys k1 and k2
+
+2. Immutable keys : IdentityHashMap does not require keys to be immutable as
+    it does not relies on equals() and hashCode() method.
+
+3. Hashcode method :   IdentityHashMap does not use hashCode() method instead
+    it uses System.identityHashCode() to find bucket location.
+    HashMap uses hashCode() method to find bucket location.
+
+
+Similarities between IdentityHashMap and HashMap
+
+1. Permit null key and null values : Both HashMap and IdentityHashMap class permit null key and null values.
+
+2. Not synchronized : Both classes are not synchronized. Both classes must be synchronized externally.
+    For IdentityHashMap :
+        Map m  = Collections.synchronizedMap(new IdentityHashMap( ... ));
+    For HashMap :
+        Map m  = Collections.synchronizedMap(new HashMap( ... ));
+
+
+
+
+In HashMap :
+two keys are considered equal   if and only if (k1==null ? k2==null  : k1.equals(k2))
+
+// object equality i.e using equals() method to compare objects
+
+
+In IdentityHashMap :
+two keys are considered equal  if and only if (k1 == k2)
+
+//reference equality  i.e  using == operator  to compare objects
