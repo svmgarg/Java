@@ -1,5 +1,5 @@
 SynchronizedMap is a static inner class of utility class java.util.Collections.
-It is quite similar to Hashtable and it also block the entire Map instance by .
+It is quite similar to Hashtable and it also block the entire Map instance.
 
 It provides functionality to convert any thread-unsafe Map implementation to thread-safe
 implementation using Collections.synchronizedMap(Map map) static method.
@@ -18,3 +18,5 @@ Difference between HashTable and Collections.synchronizedMap
   if one uses the first constructor of passing only a Map, this is used as a mutex.
   Though, the developer is allowed to pass another object of mutex as a second argument by which the lock
   on the Map methods would be only on that Object and hence less restrictive than Hashtable.
+
+

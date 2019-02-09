@@ -1,4 +1,4 @@
-package datatypes;
+package datatypes.longTest;
 
 public class LongTest {
     public static void main(String arsg[]) {

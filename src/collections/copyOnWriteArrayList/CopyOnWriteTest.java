@@ -144,6 +144,8 @@ public class CopyOnWriteTest {
  * If a thread modifies the structure of a collection i.e. add elements to it or remove elements from it,
  * while another thread (or same thread) is iterating over it, ConcurrentModificationException may be thrown by the iterator.
  * Iterator implementations that throws ConcurrentModificationException are known as fail fast iterators,
+ * Collection classes other than in java.util.concurrent package return the Fail-fast iterators.
+ * Example -  HashMap, ArrayList, Vector, Collections.synchronisedList , etc
  */
 
 
@@ -151,6 +153,8 @@ public class CopyOnWriteTest {
  *     Fail-Safe Iterator
  *  Iterator implementations that don’t throw ConcurrentModificationException when a thread modifies the structure of a collection
  *  while another thread or same thread is iterating over it, are known as fail safe iterators as they work on new copy of the original collection.
+ *  Collection classes in java.util.concurrent package return the Fail-safe iterators
+ *  Example - CopyOnWriteArrayList, CopyOnWriteArraySet, ConcurrentHashMap, etc
  */
 
 /**

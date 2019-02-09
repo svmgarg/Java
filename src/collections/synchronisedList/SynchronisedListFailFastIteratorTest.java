@@ -1,22 +1,13 @@
 package collections.synchronisedList;
 
-import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
-/**
- * In the below code, Main Thread is creating two threads Thread -1 and Thread -2
- *
- * Main Thread will be responsible for iterating the Collections.synchronisedList
- * Thread -1 will be adding even numbers to  Collections.synchronisedList  to list
- * Thread -2 will be adding odd numbers to  Collections.synchronisedList  to list
- *
- * In the below code we will be getting "ConcurrentModificationException" .
- *       1) The Collections.synchronizedList only means that add, remove etc. operations are synchronized and therefore atomic.
- *          for-loop/Iteration however is not and if a thread adds while another is iterating, you could get a ConcurrentModificationException.
- *       2) To avoid such situation we should iterate the Collections.synchronisedList in a synchronised context
- */
-public class SynchronisedListIterationProblem {
-    public static void main(String[] args) throws InterruptedException {
+public class SynchronisedListFailFastIteratorTest {
+
+    public static void main(String args[]) throws InterruptedException {
 
         List<Integer> numbers = Collections.synchronizedList(new ArrayList<Integer>());
 
@@ -58,16 +49,18 @@ public class SynchronisedListIterationProblem {
         Thread.sleep(1000);
 
 
-        System.out.println("Main Thread is iterating the numbers list without synchronised context, so 'ConcurrentModificationException' will come \n");
-        for (int i : numbers) {
-            System.out.print(i + "\t");
+        System.out.println("Main Thread is iterating the numbers list in synchronised context \n");
+        Iterator iter = numbers.iterator();
+        while(iter.hasNext()){
+            System.out.print(iter.next() + "\t");
             try {
                 Thread.sleep(15);
             } catch (InterruptedException ie) {
 
             }
         }
-        System.out.println("numbers : " + numbers);
+
+
 
     }
 }

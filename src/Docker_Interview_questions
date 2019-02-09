@@ -1,0 +1,41 @@
+What is the difference between Hypervisior and Docker?
+    The Hypervisor is the software which runs the virtual machine. It's typically responsible for allocating the resources to guest OS.
+    Docker engine is the software that runs and manages conatiner.
+    https://cdn-images-1.medium.com/max/1600/1*xef4b78LWTh-raeSkIssvA.png
+
+What is the difference between Container and Virtual Machine?
+    Containers are running application having its seprate dependencies but using same kernel.
+    Virtual Machine are also running application having its seprate dependencies but having it's own kernel too.
+    Hence, conatiners are very lightweight.
+
+1. What is Docker ?
+    -Docker is a containerization platform which packages your application and all its dependencies together in the form of containers so as to ensure that your application works seamlessly in any environment be it development or test or production.
+    -Docker containers, wrap a piece of software in a complete filesystem that contains everything needed to run: code, runtime, system tools, system libraries etc. anything that can be installed on a server.
+
+2. What is Docker image ?
+    Docker image is a snapshot of a application and all its dependencies.
+
+3. What is Docker container ?
+    Docker container is a running instance of a docker image.
+    Docker containers include the application and all of its dependencies, but share the kernel with other containers, running as isolated processes in user space on the host operating system.
+
+4. What is Docker hub ?
+    Docker hub is a cloud-based registry service and centralized repository for docker image management for distribution and change management, user and team collaboration.
+
+
+Docker basic commands-
+sudo docker images
+sudo docker ps
+sudo docker run  -it --entrypoint /bin/bash 6538fe69768                     			:: Enter into docker image
+sudo docker exec -it 004a6483eed7 bash													:: Enter into docker conatiner
+sudo docker commit 4d4e391a505a  api-gateway-management-retrieve-port-fixed             :: Saving Conatiner as a image
+sudo docker run -d  -p6060:8080    c1f90bed2e78                                         :: Exposing ports in docker
+sudo docker logs -f  a3d1b8debcfb0cc156cba8a61a9525e2afd53293bc42a733e3d5a558e968b281	:: Docker conatiner logs with tail
+sudo docker cp mycontainer:/foo.txt foo.txt												:: Add file from host to docker conatiner
+docker rm $(docker ps -qa --no-trunc --filter "status=exited")							:: Docker delete all conatiner in exited state
+docker rm $(docker ps --before 78921baec1c3 -q)											:: Docker delete all conatiner before
+
+
+How docker achieve high availablity when all run's in a single machine ?
+
+

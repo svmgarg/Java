@@ -57,18 +57,18 @@ public class SynchronisedListIterationFix {
 
 
         Thread.sleep(1000);
-
-
         System.out.println("Main Thread is iterating the numbers list in synchronised context \n");
-        for (int i : numbers) {
-            System.out.print(i + "\t");
-            try {
-                Thread.sleep(15);
-            } catch (InterruptedException ie) {
+        synchronized (numbers){
+            for (int i : numbers) {
+                System.out.print(i + "\t");
+                try {
+                    Thread.sleep(15);
+                } catch (InterruptedException ie) {
 
+                }
             }
         }
-        System.out.println("numbers : " + numbers);
+        System.out.println("\nnumbers : " + numbers);
 
     }
 }
