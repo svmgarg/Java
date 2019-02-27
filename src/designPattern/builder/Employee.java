@@ -6,38 +6,41 @@ public class Employee {
     private String designation;
     private String department;
 
-    Employee(EmployeeBuilder builder){
+    private Employee(EmployeeBuilder builder) {
         this.name = builder.name;
-        this.department  = builder.department;
+        this.department = builder.department;
         this.designation = builder.designation;
     }
 
 
-    public static class EmployeeBuilder{
+    /**
+     * Class that is used as builder for Employee
+     * on calling build method it will create a object of employee
+     *
+     */
+    public static class EmployeeBuilder {
         private String name;
         private String designation;
         private String department;
 
-        public EmployeeBuilder name(String name){
-            this.name=name;
+        public EmployeeBuilder name(String name) {
+            this.name = name;
             return this;
         }
 
-        public EmployeeBuilder designation(String designation){
-            this.designation=designation;
+        public EmployeeBuilder designation(String designation) {
+            this.designation = designation;
             return this;
         }
 
-        public EmployeeBuilder department(String department){
-            this.department=department;
+        public EmployeeBuilder department(String department) {
+            this.department = department;
             return this;
         }
 
-        public Employee build(){
-            return  new Employee(this);
+        public Employee build() {
+            return new Employee(this);
         }
-
-
 
     }
 
