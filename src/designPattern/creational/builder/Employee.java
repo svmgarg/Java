@@ -1,4 +1,4 @@
-package designPattern.builder;
+package designPattern.creational.builder;
 
 public class Employee {
 
