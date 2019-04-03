@@ -6,6 +6,16 @@ implementation using Collections.synchronizedMap(Map map) static method.
 
 
 
+Similarities between HashTable and Collections.synchronizedMap
+
+• The Hashtable class has all its methods synchronized i.e. the locking is done at the method level and hence one can say that
+    the mutex is always at the Hashtable object (this) level.
+
+• SynchronizedMap has all its methods in a Synchronized block with a mutex.
+
+
+
+
 Difference between HashTable and Collections.synchronizedMap
 
 • The Hashtable class has all its methods synchronized i.e. the locking is done at the method level
@@ -18,5 +28,6 @@ Difference between HashTable and Collections.synchronizedMap
   if one uses the first constructor of passing only a Map, this is used as a mutex.
   Though, the developer is allowed to pass another object of mutex as a second argument by which the lock
   on the Map methods would be only on that Object and hence less restrictive than Hashtable.
+
 
 

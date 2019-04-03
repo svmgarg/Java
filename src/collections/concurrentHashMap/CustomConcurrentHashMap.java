@@ -3,7 +3,7 @@ package collections.concurrentHashMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
-
+//http://javaexplorer03.blogspot.com/2015/11/why-concurrenthashmap-does-not-allow.html
 public class CustomConcurrentHashMap {
     public static void main(String args[]) {
 

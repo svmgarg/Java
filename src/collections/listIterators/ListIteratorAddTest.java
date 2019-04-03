@@ -2,48 +2,61 @@ package collections.listIterators;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ListIteratorAddTest {
 
-    public static void main(String args[] ){
+    static CopyOnWriteArrayList<Integer> aList;
 
-        ArrayList<Integer> aList = new ArrayList<>();
+    public static void main(String args[]) {
 
+        initData();
+        iterator();
+
+        initData();
+        //forloop();
+    }
+
+
+    static void iterator() {
+        ListIterator<Integer> iterator = aList.listIterator();
+
+        int counter = 0;
+        while (iterator.hasNext()) {
+            Integer i = iterator.next();
+            if (counter == 2) {
+                aList.add(2);
+            }
+            counter++;
+            System.out.println(i);
+        }
+        System.out.println(aList);
+    }
+
+    static void forloop() {
+
+        int counter = 0;
+        for(int i : aList){
+            if (counter == 2) {
+                aList.add(2);
+            }
+            counter++;
+            System.out.println(i);
+        }
+        System.out.println(aList);
+    }
+
+
+
+    static void initData() {
+        aList = new CopyOnWriteArrayList();
         aList.add(1);
         aList.add(3);
         aList.add(5);
         aList.add(4);
         aList.add(7);
         aList.add(9);
-
-        ArrayList<Integer> aList1 = new ArrayList<>();
-        for(int i  =0; i<aList.size();i++){
-            aList1.add(aList.get(i));
-            if((i+1) < aList.size() &&  aList.get(i+1)%2==0){
-                i++;
-                aList1.add(aList.get(i));
-            }else{
-                aList1.add(2);
-            }
-
-        }
-        System.out.print(aList1);
-        /*ListIterator<Integer> iterator = aList.listIterator();
-
-        while(iterator.hasNext()){
-            Integer i  = iterator.next();
-            int nextIndex = 0;
-            if(iterator.hasNext()){
-                nextIndex =  iterator.nextIndex();
-            }
-            if(i%2 ==0 && aList.get(nextIndex) %2 !=0){
-                iterator.add(2);
-
-            }
-        }
-
-        System.out.print(aList);
-*/
-
     }
+
+
 }

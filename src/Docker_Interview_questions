@@ -23,17 +23,23 @@ What is the difference between Container and Virtual Machine?
     Docker hub is a cloud-based registry service and centralized repository for docker image management for distribution and change management, user and team collaboration.
 
 
+
+
+
 Docker basic commands-
 sudo docker images
 sudo docker ps
 sudo docker run  -it --entrypoint /bin/bash 6538fe69768                     			:: Enter into docker image
 sudo docker exec -it 004a6483eed7 bash													:: Enter into docker conatiner
+sudo docker attach 004a6483eed7                                                         :: Attach docker conatiner to current terminal
 sudo docker commit 4d4e391a505a  api-gateway-management-retrieve-port-fixed             :: Saving Conatiner as a image
 sudo docker run -d  -p6060:8080    c1f90bed2e78                                         :: Exposing ports in docker
 sudo docker logs -f  a3d1b8debcfb0cc156cba8a61a9525e2afd53293bc42a733e3d5a558e968b281	:: Docker conatiner logs with tail
 sudo docker cp mycontainer:/foo.txt foo.txt												:: Add file from host to docker conatiner
 docker rm $(docker ps -qa --no-trunc --filter "status=exited")							:: Docker delete all conatiner in exited state
 docker rm $(docker ps --before 78921baec1c3 -q)											:: Docker delete all conatiner before
+docker system prune                                                                     :: Remove all dangling images and containers
+docker system prune -a                                                                  ::  Remove all images
 
 
 How docker achieve high availablity when all run's in a single machine ?

@@ -121,6 +121,16 @@ public class CopyOnWriteTest {
  * 4. The methods iterator() and listIterator() return an iterator object that holds immutable snapshot copy of the elements.
  *          a) The method iterator() returns a generic Iterator that holds a snapshot of the list. This iterator doesn’t support the remove() method.
  *          b) The method listIerator() returns a generic ListIterator that holds a snapshot of the list. This iterator doesn’t support the remove(), set() or add()  method.
+ *
+ *
+ *  5.In Add function of copy-on-write-arraylist
+ *      first reentrant lock will be acquired
+ *      then copy the array to new variable and
+ *      then do modification and
+ *      then set array and release lock
+ *      Because of this behaviour, only one thread will be updating actual values, Hence making it consistent.
+ *      and bacause of that we should use it when reading frequency is too high.
+ *
  */
 
 
