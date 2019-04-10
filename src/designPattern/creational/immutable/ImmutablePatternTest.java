@@ -1,4 +1,6 @@
-package designPattern.immutable;
+package designPattern.creational.immutable;
+
+import designPattern.creational.immutable.ImmutableClass;
 
 import java.util.ArrayList;
 import java.util.HashMap;

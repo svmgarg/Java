@@ -1,7 +1,7 @@
-package designPattern.immutable;
+package designPattern.creational.immutable;
 
 
-class Employee implements Cloneable {
+public class Employee implements Cloneable {
 
     String id;
 
