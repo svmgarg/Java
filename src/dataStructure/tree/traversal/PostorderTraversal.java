@@ -1,6 +1,6 @@
 package dataStructure.tree.traversal;
 
-import dataStructure.Node;
+import dataStructure.tree.Node;
 
 public class PostorderTraversal {
 

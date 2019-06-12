@@ -2,7 +2,6 @@ package oops.inheritance.overriding.multipleInheritanceProblem;
 
 public class Test implements A, B {
 
-
     @Override
     public Integer function() {
         return null;
@@ -10,9 +9,7 @@ public class Test implements A, B {
 
 }
 
-
 interface A {
-
     Number function();
 }
 

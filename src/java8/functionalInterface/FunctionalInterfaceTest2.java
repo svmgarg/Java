@@ -1,7 +1,5 @@
 package java8.functionalInterface;
 
-import jdk.nashorn.internal.objects.annotations.Function;
-
 public class FunctionalInterfaceTest2 {
 
     public static void main(String args[]){

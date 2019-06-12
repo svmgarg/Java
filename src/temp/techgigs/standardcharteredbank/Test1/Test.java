@@ -8,6 +8,12 @@ public class Test {
 
     public static void main(String args[]) throws Exception {
 
+
+       /*  int M = 24*60*60*1000*1000;
+        System.out.println(M);
+         long n = 24*60*60*1000;
+        System.out.println(n);
+        System.out.println(M/n);*/
         Scanner scanner = new Scanner(System.in);
         int M = Integer.parseInt(scanner.nextLine().trim());
         int N = Integer.parseInt(scanner.nextLine().trim());
@@ -25,7 +31,7 @@ public class Test {
             Q = temp;
         }
         temp = Math.max(N, Q);
-        mat = new Integer[temp][temp];
+        mat = new Integer[temp + 1][temp + 1];
         for (int i = 0; i <= temp; i++) {
             mat[i][i] = 1;
             mat[i][0] = 0;

@@ -1,6 +1,6 @@
 package dataStructure.tree.lca;
 
-import dataStructure.Node;
+import dataStructure.tree.Node;
 
 public class LCATest {
 

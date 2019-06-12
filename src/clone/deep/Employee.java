@@ -12,9 +12,6 @@ public class Employee implements Cloneable {
         this.address = address;
     }
 
-
-
-
     @Override
     protected Employee clone() throws CloneNotSupportedException {
         Employee employee = (Employee) super.clone();
@@ -46,4 +43,3 @@ public class Employee implements Cloneable {
         this.address = address;
     }
 }
-

@@ -1,6 +1,6 @@
 package dataStructure.tree.VerticalSumBinaryTree;
 
-import dataStructure.Node;
+import dataStructure.tree.Node;
 
 import java.util.Map;
 import java.util.TreeMap;

@@ -8,18 +8,21 @@ public class MethodParametersTest {
         //obj.integerMethod(Long.valueOf(10L));
         //obj.integerMethod(Short.valueOf("10"));
         //obj.longMethod(10);
-        obj.numberMethod(10);
+        obj.method(10);
     }
 
-    public void integerMethod(Integer i){
+    public void method(Integer i){
+        System.out.println("intger");
+    }
+
+    public void method(long i){
+        System.out.println("long");
+    }
+    public void method(Long i){
 
     }
 
-    public void longMethod(Long i){
-
-    }
-
-    public void numberMethod(Number i){
+    public void method(Number i){
 
     }
 

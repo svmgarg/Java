@@ -1,6 +1,6 @@
 package dataStructure.tree.mirror;
 
-import dataStructure.Node;
+import dataStructure.tree.Node;
 
 public class MirrorTest {
 

@@ -1,6 +1,6 @@
 package dataStructure.tree.sumtree;
 
-import dataStructure.Node;
+import dataStructure.tree.Node;
 
 public class SumTreeTest {
 

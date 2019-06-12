@@ -1,16 +1,11 @@
-package dataStructure;
-
+package dataStructure.linkedList;
 
 public class Node {
 
-
-    public Node left;
-    public Node right;
     public int data;
+    public Node next;
 
     public Node(int data) {
         this.data = data;
     }
 }
-
-

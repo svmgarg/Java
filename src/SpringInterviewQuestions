@@ -1,0 +1,10 @@
+How Transactions works in Spring.
+Transactions in spring using Proxy design pattern
+
+Propagation levels in Spring Transaction.
+1.Required => uses same transaction if exist otherwise create a new transaction
+2.Required_new => always create a new transaction
+
+
+How to make transactions read only.
+@Transactional(readOnly = true)

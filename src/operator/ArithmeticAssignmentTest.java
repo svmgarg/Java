@@ -13,5 +13,14 @@ public class ArithmeticAssignmentTest {
 //        double c = a + b;
         //int d = (int) (a + b);
         System.out.print(a + b);
+
+
+        short s =1;
+        s = (short) (s+1);
+        s++;
+
+
+        s=+1;
+        s+=1;
     }
 }

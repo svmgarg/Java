@@ -1,6 +1,6 @@
 package dataStructure.tree.bst;
 
-import dataStructure.Node;
+import dataStructure.tree.Node;
 
 public class ArrayToBst {
 

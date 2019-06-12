@@ -1,0 +1,98 @@
+###################################################################################################################################
+
+What is Hibernate?
+
+###################################################################################################################################
+
+Benefits of Hibernate
+1. Using Hibernate as a persistence framework makes application database independent.
+2. Hibernate provides high performance
+3. Hibernate supports caching and Lazy Loading.
+4. Hibernate provides support for concurrency and transaction management.
+
+###################################################################################################################################
+
+What will happen if we don’t have no-args constructor in Entity bean?
+Hibernate uses Reflection API to create instance of Entity beans, usually when you call get() or load() methods.
+The method Class.newInstance() is used for this and it requires no-args constructor. So if you won’t have no-args constructor in
+entity beans, hibernate will fail to instantiate it and you will get HibernateException.
+
+###################################################################################################################################
+
+Why we should not make Entity Class final?
+Hibernate use proxy classes for lazy loading of data, only when it’s needed. This is done by extending the entity bean,
+if the entity bean will be final then lazy loading will not be possible, hence low performance.
+
+###################################################################################################################################
+
+What is difference between Hibernate Session get() and load() method?
+Hibernate session comes with different methods to load data from database. get and load are most used methods,
+at first look they seems similar but there are some differences between them.
+
+get() loads the data as soon as it’s called whereas load() returns a proxy object and loads data only when it’s actually required,
+so load() is better because it support lazy loading. Since load() throws exception when data is not found,
+we should use it only when we know data exists. We should use get() when we want to make sure data exists in the database
+
+###################################################################################################################################
+
+What is difference between Hibernate save(), saveOrUpdate() and persist() methods?
+Hibernate save can be used to save entity to database. Problem with save() is that it can be invoked without a transaction and
+if we have mapping entities, then only the primary object gets saved causing data inconsistencies.
+Also save returns the generated id immediately.
+
+Hibernate persist is similar to save with transaction. I feel it’s better than save because we can’t use it outside the boundary of
+transaction, so all the object mappings are preserved. Also persist doesn’t return the generated id immediately, so data persistence
+happens when needed.
+
+Hibernate saveOrUpdate results into insert or update queries based on the provided data. If the data is present in the database,
+update query is executed. We can use saveOrUpdate() without transaction also, but again you will face the issues with mapped objects
+not getting saved if session is not flushed. For example usage of these methods, read Hibernate save vs persist
+
+###################################################################################################################################
+
+What is Versioning in Hibernate.
+Two users are working on a project and they both are currently viewing a bug or an enhancement in a project management application.
+Let’s say one user knows that it is a duplicate bug while the other does not know and thinks that this needs to be done.
+Now one user changes its status as IN PROGRESS and the other user marks it as DUPLICATE at the same time but the request with status
+as DUPLICATE goes a bit early to the server and the request with status IN PROGRESS arrives later. What will be the current status?
+
+It will be IN PROGRESS as the later request will overwrite the previous status. These kind of scenarios are common when multiple users
+work on same application and should be prevented.
+
+In general, following is the scenario which should be prevented :
+Two transactions read a record at the same time.
+One transaction updates the record with its value.
+Second transaction, not aware of this change, updates the record according to its value.
+End Result is, the update of first transaction is completely lost.
+
+Solution -
+Hibernate has a provision of version based control to avoid such kind of scenarios. Under this strategy, a version column is used to
+keep track of record updates. This version may either be a timestamp or a number.
+    If it is a number, Hibernate automatically assigns a version number to an inserted record and increments
+      it every time the record is modified.
+    If it is a timestamp, Hibernate automatically assigns the current timestamp at which the record was inserted / updated.
+Hibernate keeps track of the latest version for every record (row) in the database and appends this version to the where condition
+used to update the record. When it finds that the entity record being updated belongs to the older version, it issues an
+org.hibernate.StaleObjectStateException and the wrong update will be cancelled.
+
+
+Implementing Versioning -
+@Entity
+@Table(name = "defect")
+public class Defect {
+
+   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private int id;
+
+   @Column(name = "Description")
+   private String description;
+
+   @Version
+   private int version;
+
+ }
+
+###################################################################################################################################
+
+
+###################################################################################################################################

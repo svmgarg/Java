@@ -1,6 +1,6 @@
 package dataStructure.tree.maximumWidth;
 
-import dataStructure.Node;
+import dataStructure.tree.Node;
 
 import java.util.LinkedList;
 import java.util.List;

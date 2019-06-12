@@ -1,0 +1,351 @@
+--------------------------------------------------------------------------------------------------------------
+==> Why we should call wait() method in loop ?
+
+
+synchronized (obj) {
+    while (condition does not hold) {
+        obj.wait();
+    }
+}
+
+
+Suppose 10 threads are waiting on object 'obj' for some condition respective to be occured.
+Now notification mechanism notifies the waiting thread and say Thread 5 got notified
+and Thread 5 come out of waiting state but its respective condition is not yet met so Thread 5 will go back to wait state
+
+--------------------------------------------------------------------------------------------------------------
+
+==>  Can we make array volatile in Java?
+
+Yes, you can make an array volatile in Java but only the reference which is pointing to an array, not the whole array.
+What I mean, if one thread changes the reference variable to points to another array, that will provide a volatile guarantee,
+but if multiple threads are changing individual array elements they won't be having happens before guarantee provided
+by the volatile modifier.
+
+
+--------------------------------------------------------------------------------------------------------------
+
+==> Why character array is better than String for Storing password in Java ?
+
+Since Strings are immutable in Java if you store password as plain text it will be available in memory until
+Garbage collector clears it and since String are used in String pool for reusability there is pretty high chance
+that it will be remain in memory for long duration, which pose a security threat.
+
+
+--------------------------------------------------------------------------------------------------------------
+
+==> What is Java ClassLoader?
+We know that Java Program runs on Java Virtual Machine (JVM). When we compile a Java Class,
+it transforms it in the form of bytecode that is platform and machine independent compiled program and
+store it as a .class file. After that when we try to use a Class, Java ClassLoader loads that class into memory.
+
+There are three types of built-in ClassLoader in Java:
+
+Bootstrap Class Loader – It loads JDK internal classes, typically loads rt.jar and other core classes for example java.lang.* package classes
+Extensions Class Loader – It loads classes from the JDK extensions directory, usually $JAVA_HOME/lib/ext directory.
+System Class Loader – It loads classes from the current classpath that can be set while invoking a program using -cp or -classpath command line options.
+
+--------------------------------------------------------------------------------------------------------------
+
+package org.arpit.java2blog;
+class A
+{
+	void m1()	{		System.out.println("In m1 A");	}
+}
+class B extends A
+{
+	void m1()	{		System.out.println("In m1 B");	}
+	void m2()	{		System.out.println("In m2 B");	}
+}
+public class Test {
+
+	public static void main(String[] args) {
+		A a=new B();
+		a.m2();
+	}
+}
+
+Compile time error
+A doesn't have m2 method
+--------------------------------------------------------------------------------------------------------------
+package org.arpit.java2blog;
+
+class A
+{
+	void m1() throws ArrayIndexOutOfBoundsException
+	{
+		System.out.println("In m1 A");
+	}
+}
+class B extends A
+{
+	void m1() throws IndexOutOfBoundsException
+	{
+		System.out.println("In m1 B");
+	}
+}
+public class Test {
+
+	public static void main(String[] args) {
+		A a=new B();
+		a.m1();
+	}
+}
+
+In m1 B, As IndexOutOfBound and ArrayIndexOutOfBound are runtime exception
+
+--------------------------------------------------------------------------------------------------------------
+
+package org.arpit.java2blog;
+
+import java.io.IOException;
+
+class A
+{
+	void m1() throws IOException
+	{
+		System.out.println("In m1 A");
+	}
+}
+class B extends A
+{
+	void m1() throws Exception
+	{
+		System.out.println("In m1 B");
+	}
+}
+public class Test {
+
+	public static void main(String[] args) {
+		A a=new B();
+		try {
+			a.m1();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+Compile time error, As IOException  is a checkedException
+--------------------------------------------------------------------------------------------------------------
+
+class A
+{
+	synchronized void m1()
+	{
+		System.out.println("In m1 A");
+	}
+	void m2()
+	{
+		System.out.println("In m2 A");
+	}
+}
+There are two threads T1 and T2. T1 is accessing m1 method. Will T2 be able to access m2 method on the same instance at the same time?
+Yes, T2 will be able to access m2 as it does not require lock to access m2 method.
+
+--------------------------------------------------------------------------------------------------------------
+
+class A
+{
+	synchronized void m1()
+	{
+		System.out.println("In m1 A");
+	}
+	synchronized void m2()
+	{
+		System.out.println("In m2 A");
+	}
+}
+
+There are two threads T1 and T2. T1 is accessing m1 method. Will T2 be able to access m2 method on the same instance at the same time?
+No, T2 will not be able to access m2 as it requires lock to access m2 method which is already taken by T1 thread.
+--------------------------------------------------------------------------------------------------------------
+class A
+{
+	synchronized static void m1()
+	{
+		System.out.println("In m1 A");
+	}
+	synchronized void m2()
+	{
+		System.out.println("In m2 A");
+	}
+}
+
+There are two threads T1 and T2. T1 is accessing m1 method. Will T2 be able to access m2 method on the same instance at the same time?
+Yes, T2 will be able to access m2 as it requires object level lock to access m2 method and T1 thread has taken class level lock.You can read more about Object level lock vs Class level lock.
+
+
+--------------------------------------------------------------------------------------------------------------
+package org.arpit.java2blog;
+
+import java.util.HashSet;
+
+public class Customer {
+
+	String name;
+	int age;
+
+	Customer(String name,int age)
+	{
+		this.name=name;
+		this.age=age;
+	}
+	public static void main(String[] args) {
+
+		Customer c1= new Customer("John",20);
+		Customer c2= new Customer("John",20);
+
+		HashSet<Customer> customerSet=new HashSet<>();
+		customerSet.add(c1);
+		customerSet.add(c2);
+		System.out.println(customerSet.size());
+	}
+
+	// getters and setters
+}
+Output will be 2 as we did not implement hashcode and equals method in Customer class.
+
+
+--------------------------------------------------------------------------------------------------------------
+
+package org.arpit.java2blog;
+
+public class Employee {
+	String name;
+	int age;
+
+	public Employee(String name,int age)
+	{
+		this.name=name;
+		this.age=age;
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + age;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		if (age != other.age)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+}
+
+Main class
+package org.arpit.java2blog;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class HashMapMain {
+
+	public static void main(String[] args) {
+		Employee emp1=new Employee("Martin",27);
+		Map<Employee,String> hm=new HashMap<Employee,String>();
+		hm.put(emp1, "Verified");
+		emp1.setName("John");
+		System.out.println(hm.get(emp1));
+	}
+}
+
+Output will be null.
+Reason behind this is the hashcode of employee method will be changed.
+
+
+--------------------------------------------------------------------------------------------------------------
+
+What is Java ClassPath?
+ClassPath is environment variable which java virtual machine (JVM) uses to locate all classes which is used by the program.
+For example: jre/lib/rt.jar has all java classes and you also need to include jar files or class file which is being used by program.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+What are two different ways to call garbage collector?
+System.gc() OR Runtime.getRuntime().gc();
+
+-----------------------------------------------------------------------------------------------------------------------------------
+Design Principles in Java
+
+S |   Single Responsibility Principle       =>  A class should have only one responsiblity
+O |   Open Closed Principle                 =>  Software components should be open for extension but closed for modification
+L |   Liskov's Substitution Principle       =>  Any derived class should able to replace the base class.
+I |   Interface Segregation Principle       =>  Divide the functionalities in required interfaces
+D |   Dependency Inversion Principle        =>  “Depend on abstractions, not on concretions”
+
+1. DRY (Do not repeat yourself)
+     Don't write repetitive code.
+2. Encapsulate what varies.
+    Consider sceanrio , we have Pet as parent class and child as Dog, Cat, Duck
+    so we can write code as below.
+        if (pet.type() == dog) {
+          pet.bark();
+        } else if (pet.type() == cat) {
+          pet.meow();
+        } else if (pet.type() == duck) {
+          pet.quack()
+        }
+    Instead of docing this I can have a speak function in Dog, Cat and  Duck.
+    From speak, I can call respective function.
+        pet.speak();
+3. Open Closed Principle
+    A class/interface (Model class say Employee) should be closed to modifications, since it may be compiled, stored in a library, baselined, and used by client classes.
+    But it should be open extension, For any new client module, it should be able to define a descendant class and use it as parent, adding new features.
+    without changing the original code or to disturb existing  clients.
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+What is busy spinning.
+
+Busy-waiting or spinning is a technique in which a process repeatedly checks to see if a condition is true
+instead of calling wait or sleep method and releasing CPU.
+
+Advantage of not releasing CPU is that, all cached data and instruction are remained unaffected, which may be lost,
+had this thread is suspended on one core and brought back to another thread
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+Strong reference vs Weak Reference vs Soft reference
+
+Strong Reference is most simple as we use it in our day to day programming life e.g. in the code, String s = "abc" ,
+reference variable s has strong reference to String object "abc". Any object which has Strong reference attached to
+it is not eligible for garbage collection.
+
+A soft reference object (or a softly reachable object) can be cleared by the Garbage Collector in response to a memory demand.
+A softly reachable object has no strong references pointing to it.
+In comparison to weak references, soft references can have longer lifetimes since they continue to exist until extra memory is required.
+
+-----------------------------------------------------------------------------------------------------------------------------------
