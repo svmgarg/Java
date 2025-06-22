@@ -1,0 +1,22 @@
+------------------------------------------------------------------------------------------------------------------------------
+What is Compile Time Excepiton ?
+Compile Time Exception are those which compiler forces us to handle it at compile time.
+Example of Compile Time exception are -
+* IOException
+* SQLException
+* FileNotFoundException
+* ClassNotFoundException
+
+What is Runtime Exception ?
+A RuntimeException is an unchecked exception in Java — it occurs at runtime and is not checked by the compiler.
+Example of Runtime exception are -
+* NullPointerException
+* ArrayIndexOutOfBoundsException
+* ArithmeticException
+* ClassCastException
+
+------------------------------------------------------------------------------------------------------------------------------
+
+🧠 Rule of Thumb:
+-- Use checked exceptions for external/environmental problems (e.g., files, sockets, DB).
+-- Use unchecked exceptions for programming bugs (e.g., null, bad arguments, logic errors).
